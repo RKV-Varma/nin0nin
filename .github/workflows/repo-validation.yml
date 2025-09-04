@@ -1,13 +1,13 @@
 name: Repo Validation
 
 on:
-  pull_request:
-    branches: [ main ]
   push:
-    branches: [ main ]
+    branches:
+      - main
 
 jobs:
   validate:
+    name: Repo Validation Check
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4

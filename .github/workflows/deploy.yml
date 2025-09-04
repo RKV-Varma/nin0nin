@@ -3,10 +3,8 @@ name: Deploy Python App to Cloud Run
 on:
   push:
     branches: [ main ]
-    paths: [ 'python-app/**' ]
   pull_request:
     branches: [ main ]
-    paths: [ 'python-app/**' ]
 
 env:
   PROJECT_ID: your-gcp-project-id
@@ -16,9 +14,6 @@ env:
 jobs:
   test:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./python-app
     
     steps:
     - uses: actions/checkout@v4
@@ -58,9 +53,6 @@ jobs:
     needs: test
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'
-    defaults:
-      run:
-        working-directory: ./python-app
     
     steps:
     - uses: actions/checkout@v4

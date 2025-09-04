@@ -14,7 +14,7 @@ deny[msg] {
 
 # Rule 3: Must contain a GitHub workflow
 deny[msg] {
-  not workflow exists
+  not workflow_exists
   msg := "Missing GitHub Actions workflows"
 }
 

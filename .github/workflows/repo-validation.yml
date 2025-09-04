@@ -14,16 +14,16 @@ jobs:
 
       - name: Install Conftest (OPA CLI wrapper)
         run: |
-          wget https://github.com/open-policy-agent/conftest/releases/download/v0.48.0/conftest_0.48.0_Linux_x86_64.tar.gz
-          tar xzf conftest_0.48.0_Linux_x86_64.tar.gz
-          sudo mv conftest /usr/local/bin/
+          curl -L https://github.com/open-policy-agent/conftest/releases/latest/download/conftest_$(uname -s)_$(uname -m).tar.gz \
+            | tar xz -C /usr/local/bin
 
       - name: Generate repo input
         run: |
-          echo "name: $GITHUB_REPOSITORY" > repo.yaml
+          echo "name: ${{ github.event.repository.name }}" > repo.yaml
           echo "files:" >> repo.yaml
-          find . -type f | sed 's|^\./||' | awk '{print "  - " $1}' >> repo.yaml
-
+          git ls-files | sed 's/^/  - /' >> repo.yaml
+          echo "Generated repo.yaml:"
+          cat repo.yaml
       
       - name: Run OPS repo checks
         run: conftest test repo.yaml --policy policies/

@@ -2,7 +2,7 @@ package repo
 
 # Rule 1: Repo must have README.md
 deny[msg] {
-  not input.files("README.md")
+  not file_exists("README.md")
   msg := "README.md file missing"
 }
 
@@ -20,13 +20,13 @@ deny[msg] {
 
 # -------- Helper function --------
 file_exists(filename) {
-  some f
-  f := input.files[_]
-  f == filename
+  some file
+  file := input.files[_]
+  file == filename
 }
 
 workflow_exists {
-  some f
-  f := input.files[_]
+  some wf
+  wf := input.files[_]
   startswith(f, ".github/workflows")
 }

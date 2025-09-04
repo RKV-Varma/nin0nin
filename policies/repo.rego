@@ -24,7 +24,5 @@ file_exists(filename) {
 }
 
 workflow_exists {
-  some wf
-  wf := input.files[_]
-  startswith(wf, ".github/workflows")
+  startswith(input.files[_], ".github/workflows")
 }

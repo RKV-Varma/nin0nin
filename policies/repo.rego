@@ -14,7 +14,7 @@ deny[msg] {
 
 # Rule 3: Must contain a GitHub workflow
 deny[msg] {
-  not workflow_exists
+  not workflow_exists()
   msg := "Missing GitHub Actions workflows"
 }
 
@@ -23,6 +23,6 @@ file_exists(filename) {
   input.files[_] == filename
 }
 
-workflow_exists {
+workflow_exists() {
   startswith(input.files[_], ".github/workflows")
 }

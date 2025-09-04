@@ -14,9 +14,7 @@ deny[msg] {
 
 # Rule 3: Must contain a GitHub workflow
 deny[msg] {
-  not some f
-  f := input.files[_]
-  startswith(f, ".github/workflows")
+  not workflow exists
   msg := "Missing GitHub Actions workflows"
 }
 
@@ -25,4 +23,10 @@ file_exists(filename) {
   some f
   f := input.files[_]
   f == filename
+}
+
+workflow_exists {
+  some f
+  f := input.files[_]
+  startswith(f, ".github/workflows")
 }

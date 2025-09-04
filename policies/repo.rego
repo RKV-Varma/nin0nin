@@ -20,13 +20,11 @@ deny[msg] {
 
 # -------- Helper function --------
 file_exists(filename) {
-  some file
-  file := input.files[_]
-  file == filename
+  input.files[_] == filename
 }
 
 workflow_exists {
   some wf
   wf := input.files[_]
-  startswith(f, ".github/workflows")
+  startswith(wf, ".github/workflows")
 }
